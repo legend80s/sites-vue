@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="https://cn.vuejs.org/images/icons/favicon-96x96.png">
     <SearchBox/>
   </div>
 </template>
