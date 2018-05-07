@@ -1,6 +1,6 @@
 *可关注微信公众号”JavaScript及编程艺术“*
 
-![北京女子图鉴](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/96a2ed10c3af658eba338519035e2c1b.png)
+![北京女子图鉴](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-1.png)
 
 ## 准备工作
 
@@ -17,11 +17,11 @@
 
 **优酷效果图：**
 
-![北京女子图鉴-优酷](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/d719a90dc5d0931f7dcd33e68a487fd6.png)
+![北京女子图鉴-优酷](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-%E4%BC%98%E9%85%B7-home.png)
 
 **我的效果图：**
 
-![我的下拉提示效果图-带 vue logo](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/bcec9081cc604ecf01bdf6c23ad5d5fc.png)
+![我的下拉提示效果图-带 vue logo](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-my-vue-logo.png)
 
 ### 2. 项目初始化
 
@@ -45,7 +45,7 @@
 
 现代 UI 框架均提倡组件化开发模式，所以我们一开始就按模块设计是一个好的习惯。按照 Vue 的说法所有的应用均可类似一棵嵌套的组件树的形式来组织。
 
-![vue nested component tree](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/b5c08269dfc26ae6d7db3801e9efd296.png)
+![vue nested component tree](https://raw.githubusercontent.com/legend80s/statics/master/vue-components.png)
 
 <center>*一棵嵌套的组件树*</center>
 
@@ -516,11 +516,11 @@ export default {
 
 代码见：[version1 分支](https://github.com/legend80s/sites-vue/tree/feature/version1)，最终效果如下：
 
-![我的效果图之初始化时显示十条热搜](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/c4ec0ace6e634c98d14a586d78d2fc82.png)
+![我的效果图之初始化时显示十条热搜](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-initial.png)
 
 <center>*初始化时显示十条热搜*</center>
 
-![输入“北京女子”展现相应的下拉提示结果](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/57704d03ac5bf2a42720fb37ae6fcbcf.png)
+![输入“北京女子”展现相应的下拉提示结果](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-my-brief.png)
 
 <center>*输入“北京女子”展现相应的下拉提示结果*</center>
 
@@ -583,7 +583,7 @@ export default {
 
 > *Angular.js 明显有坑，React 没有明显的坑，Vue.js 明显没有坑*
 
-![vue-logo-96x96](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/dce932c4a49f1b558594213dc6fb6be6.png)
+![vue-logo-96x96](https://raw.githubusercontent.com/legend80s/statics/master/vue-logo-96x96.png)
 
 ## 参考
 
