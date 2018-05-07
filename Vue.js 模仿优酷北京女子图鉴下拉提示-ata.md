@@ -106,7 +106,7 @@ export default {
 
 开始我们的第一个组件 `SearchBox`，它包含 `input`，`button` 和自定义组件 `SuggestionList`。该组件用到了 `el-form`、`el-input`和 `el-button`，所以我们只需加载这三个基础组件，加载和使用方法见参考链接“[element-ui 快速上手](http://element.eleme.io/#/zh-CN/component/quickstart)”。
 
-```javascript
+```vue
 <!-- src/components/SearchBox.vue -->
 <template>
   <el-form @submit.native.prevent="search" class="search-box">
@@ -171,7 +171,7 @@ export default {
 
 下面完成 `SuggestionList` 组件，它包含 `SuggestionItem`。**注意 `v-for` 元素必须提供唯一的 `key`。**
 
-```javascript
+```vue
 <!-- src/components/SuggestionList.vue -->
 <template>
   <div class="suggestion-list-wrapper">
@@ -190,14 +190,14 @@ import SuggestionItem from './SuggestionItem';
 
 export default {
   name: 'SuggestionList',
-  
+
   props: {
     suggestions: {
       type: Array,
       required: true,
     },
   },
-  
+
   components: {
     SuggestionItem,
   },
@@ -205,9 +205,9 @@ export default {
 </script>
 ```
 
-接下来完成 `SuggestionItem` 组件，其功能是展示一条下拉提示以及它的序号。加 `validator` 的目的是确保 `suggestion` 必须包含 `value`和 `index` 属性。`validator` 返回 `true` 则验证通过，否则会在控制台打印错误信息。 
+接下来完成 `SuggestionItem` 组件，其功能是展示一条下拉提示以及它的序号。加 `validator` 的目的是确保 `suggestion` 必须包含 `value`和 `index` 属性。`validator` 返回 `true` 则验证通过，否则会在控制台打印错误信息。
 
-```javascript
+```vue
 <!-- src/components/SuggestionItem.vue -->
 <template>
   <li>
@@ -239,7 +239,7 @@ export default {
 
 首先我们从优酷的主页“盗取”其下拉提示 API，尝试几次后发现用 `window.fetch` 会报跨域错误，故只能用 jsonp 来获取数据，从 `awesome-vue` 搜索到 jsonp 工具 `vue-jsonp`。`SearchBox` 组件利用其发起请求，并利用 lodash 的 `debounce` 防止频繁输入引发多余的无用请求。
 
-```javascript
+```vue
 <!-- src/components/SearchBox.vue -->
 <template>
   <el-form @submit.native.prevent="search" class="search-box">
@@ -313,7 +313,7 @@ export default {
 4. 缓存。基于其依赖进行缓存，计算属性可以用 method 代替但却失去了缓存效果
 5. 避免滥用 `watch`。`watch` 是命令式的而且 ***MAGIC, DIRTY, UNPREDICTABLE, UNCONTROLLABLE THUS EVIL***。该函数类似于 Angular.js ”臭名昭著“的同名函数。当然也有其使用场景，详情请参考 [计算属性-vs-侦听属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7-vs-%E4%BE%A6%E5%90%AC%E5%B1%9E%E6%80%A7)
 
-```javascript
+```vue
 <!-- src/components/SearchBox.vue -->
 <SuggestionList
   v-if="suggestions.length > 0"
@@ -346,7 +346,7 @@ export default {
       required: true,
     },
   },
-  
+
   computed: {
     /**
      * 返回高亮（加粗）后的下拉提示
@@ -379,7 +379,7 @@ Vue 为什么不允许跨组件通信，是为了解耦，祖先祖先无需也�
 
  本文采用方法 3。
 
-```javascript
+```vue
 <!-- src/components/SuggestionItem.vue -->
 <!-- 孙子组件触发事件 -->
 <template>
@@ -404,7 +404,7 @@ export default {
 </script>
 ```
 
-```javascript
+```vue
 <!-- src/components/SuggestionList.vue -->
 <!-- 父组件负责向上传递事件 -->
 <template>
@@ -432,7 +432,7 @@ export default {
 </script>
 ```
 
-```javascript
+```vue
 <!-- src/components/SearchBox.vue -->
 <!-- 祖先组件监听来自父组件的事件 -->
 <template>
@@ -462,7 +462,7 @@ export default {
 
 利用 `v-bind:class`，如果 `index` 为 0 1 2 则 `class` 添加 `top3`。该指令和 Angular.js 的 `ng-class` 完全一样。
 
-```javascript
+```vue
 <!-- src/components/SuggestionItem.vue -->
 <template>
   <li
@@ -493,7 +493,7 @@ li {
 
 可利用 `created` 钩子初始化异步资源。小提示：`window.open` 参数可以不 `encodeURIComponent`，因为浏览器会帮我们做。
 
-```javascript
+```vue
 <!-- src/components/SearchBox.vue -->
 <script>
 export default {
