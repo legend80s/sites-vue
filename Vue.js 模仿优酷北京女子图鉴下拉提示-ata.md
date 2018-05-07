@@ -6,7 +6,7 @@
 
 ### 1. 确定需求
 
-**需求：**实现类似优酷的搜索下拉提示效果，具体要求：
+**需求：** 实现类似优酷的搜索下拉提示效果，具体要求：
 
 1. 输入文字展现相应下拉提示结果
 2. 高亮匹配的查询词
@@ -301,11 +301,11 @@ export default {
 
 为完成该需求 `SuggesitionItem` 组件须知道输入的 query，所以关键点是如何将 `SearchBox`（爷爷）的属性传递给 `SuggesitionItem`（孙子）。
 
-**组件间通信：**Vue 规定数据只能从上往下单向流动，所以我们应该将 `query` 当做组件的属性一一传递下去。利用`v-bind:query`指令即可。
+**组件间通信：** Vue 规定数据只能从上往下单向流动，所以我们应该将 `query` 当做组件的属性一一传递下去。利用`v-bind:query`指令即可。
 
-**v-html：**因为高亮必须插入 html 标签，所以必须利用 `v-html` 指令。注意只有你信任的内容才可以用该指令，因为有可能导致 xss 攻击，否则请直接用插值 `{{}}` 表达式，其他注意事项见参考文献”v-html“。
+**v-html：** 因为高亮必须插入 html 标签，所以必须利用 `v-html` 指令。注意只有你信任的内容才可以用该指令，因为有可能导致 xss 攻击，否则请直接用插值 `{{}}` 表达式，其他注意事项见参考文献”v-html“。
 
-**computed：**计算属性，参考链接 [计算属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)。当一个变量依赖另一个变量时可将其定义为计算属性，好处是：
+**computed：** 计算属性，参考链接 [计算属性](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)。当一个变量依赖另一个变量时可将其定义为计算属性，好处是：
 
 1. 易读。
 2. 复用性好。尤其当在模板中多次引用该变量时。
@@ -583,8 +583,7 @@ export default {
 
 > *Angular.js 明显有坑，React 没有明显的坑，Vue.js 明显没有坑*
 
-<center>![vue-logo-96x96](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/dce932c4a49f1b558594213dc6fb6be6.png)</center>
-
+![vue-logo-96x96](http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/dce932c4a49f1b558594213dc6fb6be6.png)
 
 ## 参考
 
