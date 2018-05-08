@@ -1,4 +1,4 @@
-*可关注微信公众号”JavaScript及编程艺术“*
+*可关注微信公众号”JavaScript与编程艺术“*
 
 ![北京女子图鉴](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-1.png)
 
