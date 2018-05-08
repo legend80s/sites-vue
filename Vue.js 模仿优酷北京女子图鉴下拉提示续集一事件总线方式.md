@@ -6,7 +6,7 @@
 
 > *Angular.js 明显有坑，React 没有明显的坑，Vue.js 明显没有坑*
 
-------
+![北京女子图鉴](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-work-at-weekend.png)
 
 本文是继 *“Vue.js 模仿优酷北京女子图鉴下拉提示”* 的后续篇，采用全局事件总线方式改写“点击下拉提示结果自动替换到输入框”的功能。
 
