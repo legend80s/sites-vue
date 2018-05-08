@@ -154,5 +154,5 @@ export default {
 
 ## 参考
 
-1. VueJS Grandchild component call function in Great grandparent component
-：https://stackoverflow.com/questions/43254812/vuejs-grandchild-component-call-function-in-great-grandparent-component/43257152
+1. [VueJS Grandchild component call function in Great grandparent component](https://stackoverflow.com/questions/43254812/vuejs-grandchild-component-call-function-in-great-grandparent-component/43257152)
+
