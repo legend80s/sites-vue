@@ -1,10 +1,16 @@
 *可关注微信公众号”JavaScript与编程艺术“*
 
+## 前言
+
+**Vue is Awesome!**
+
+> *Angular.js 明显有坑，React 没有明显的坑，Vue.js 明显没有坑*
+
 ![北京女子图鉴](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-1.png)
 
 ## 准备工作
 
-### 1. 确定需求
+### 一、确定需求
 
 **需求：** 实现类似优酷的搜索下拉提示效果，具体要求：
 
@@ -23,7 +29,7 @@
 
 ![我的下拉提示效果图-带 vue logo](https://raw.githubusercontent.com/legend80s/statics/master/%E5%8C%97%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4-my-vue-logo.png)
 
-### 2. 项目初始化
+### 二、项目初始化
 
 ```shell
 1. cd ~/workspace/learning/programming/js/framework # 进入你的工作目录
@@ -37,11 +43,11 @@
 
 打开 `App.vue` 发现没有语法高亮，`cmd + shift +p` 安装 `Vue Syntax Highlight`。若被墙无法安装，请自行搜索解决。安装完毕重新打开该文件，即可发现已有语法高亮。
 
-### 3. 选择 UI 库
+### 三、选择 UI 库
 
 对比 vue-material、vuetify 和 element-ui 的下载数，以及各自的组件样式，最终选择我喜欢的 element-ui。
 
-### 4. 模块设计
+### 四、模块设计
 
 现代 UI 框架均提倡组件化开发模式，所以我们一开始就按模块设计是一个好的习惯。按照 Vue 的说法所有的应用均可类似一棵嵌套的组件树的形式来组织。
 
@@ -102,7 +108,7 @@ export default {
 };
 ```
 
-### 1. 静态页面
+### 一、静态页面
 
 开始我们的第一个组件 `SearchBox`，它包含 `input`，`button` 和自定义组件 `SuggestionList`。该组件用到了 `el-form`、`el-input`和 `el-button`，所以我们只需加载这三个基础组件，加载和使用方法见参考链接“[element-ui 快速上手](http://element.eleme.io/#/zh-CN/component/quickstart)”。
 
@@ -235,7 +241,7 @@ export default {
 
 静态页面基本完成，接下来完成主功能。
 
-### 2. 输入文字展现相应下拉提示结果
+### 二、输入文字展现相应下拉提示结果
 
 首先我们从优酷的主页“盗取”其下拉提示 API，尝试几次后发现用 `window.fetch` 会报跨域错误，故只能用 jsonp 来获取数据，从 `awesome-vue` 搜索到 jsonp 工具 `vue-jsonp`。`SearchBox` 组件利用其发起请求，并利用 lodash 的 `debounce` 防止频繁输入引发多余的无用请求。
 
@@ -297,7 +303,7 @@ export default {
 
 至此“输入文字展现相应下拉提示结果”功能已经完成。下面完成”高亮显示匹配的查询词“。
 
-### 3. 高亮显示匹配的查询词
+### 三、高亮显示匹配的查询词
 
 为完成该需求 `SuggesitionItem` 组件须知道输入的 query，所以关键点是如何将 `SearchBox`（爷爷）的属性传递给 `SuggesitionItem`（孙子）。
 
@@ -363,7 +369,7 @@ export default {
 </script>
 ```
 
-### 4. 点击下拉提示结果自动替换到输入框
+### 四、点击下拉提示结果自动替换到输入框
 
 该功能难点在于孙子组件需改变其祖先组件的属性。改变父组件我们可通过子组件触发自定义事件 `$emit('event-name'[, ...payloads])` 父组件监听的方式来实现。但无法跨层监听，即祖先组件无法监听到孙子组件触发的事件，因为 Vue 的事件不支持“冒泡”。
 
@@ -458,7 +464,7 @@ export default {
 </script>
 ```
 
-### 5. 前三条下拉提示序号标红凸显为热词
+### 五、前三条下拉提示序号标红凸显为热词
 
 利用 `v-bind:class`，如果 `index` 为 0 1 2 则 `class` 添加 `top3`。该指令和 Angular.js 的 `ng-class` 完全一样。
 
@@ -489,7 +495,7 @@ li {
 
 完成最后两个需求。
 
-###6. 点击搜索及初始化显示十条热搜
+###六、点击搜索及初始化显示十条热搜
 
 可利用 `created` 钩子初始化异步资源。小提示：`window.open` 参数可以不 `encodeURIComponent`，因为浏览器会帮我们做。
 
