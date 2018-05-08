@@ -8,7 +8,7 @@
 
 ------
 
-本文是继 *“Vue.js 模仿优酷北京女子图鉴下拉提示”* 的后续篇，采用全局事件总线方式改写“点击下拉提示结果自动替换到输入框”功能。
+本文是继 *“Vue.js 模仿优酷北京女子图鉴下拉提示”* 的后续篇，采用全局事件总线方式改写“点击下拉提示结果自动替换到输入框”的功能。
 
 总体思路：最上层组件初始化事件总线（bus）并监听该总线上的感兴趣的事件，中间组件负责向下传递总线，目标组件则通过该总线触发事件。
 
@@ -84,7 +84,7 @@ export default {
 <script>
 import Vue from 'vue';
 
-// 无需向上冒泡事件，只需将 `bus` 往下传递，代码更加精简、更加解耦
+// 无需向上冒泡事件，只需将 `bus` 往下传递，代码更精简、更加解耦
 export default {
   name: 'SuggestionList',
 
@@ -148,8 +148,9 @@ export default {
 
 1. bus 可以是任何具备 `$emit` 和 `$on` 即触发和监听事件能力的对象，一般在 Vue 中我们就用 Vue 的实例即可。
 2. 与原生事件的监听回调的触发机制不同，vue 的监听方式`vue.$on('event-name', handler)` 已替调用者自动绑定正确的 `this`，无需手动绑定或者使用 arrow function。这一点比 React 好。React 的绑定 `this` 有四五种方式，下次有机会可写一写。
+3. Vue 模板中的事件也自动绑定了 `this`。
 
-完整代码见 [feature/bus 分支]\(https://github.com/legend80s/sites-vue/tree/feature/bus)
+完整代码见 [feature/bus 分支](https://github.com/legend80s/sites-vue/tree/feature/bus)
 
 ## 参考
 
