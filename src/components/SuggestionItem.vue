@@ -1,13 +1,15 @@
 <template>
   <li
-    v-on:click="handleClick(suggestion)"
+    @click="handleClick(suggestion)"
   >
-    <span v-bind:class="{ top3: suggestion.index < 3 }">{{ suggestion.index + 1 }}. </span>
+    <span :class="{ top3: suggestion.index < 3 }">{{ suggestion.index + 1 }}. </span>
     <span v-html="hilighted"></span>
   </li>
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
   name: 'SuggestionItem',
 
@@ -23,6 +25,11 @@ export default {
 
     query: {
       type: String,
+      required: true,
+    },
+
+    bus: {
+      type: Vue,
       required: true,
     },
   },
@@ -41,7 +48,7 @@ export default {
 
   methods: {
     handleClick({ value }) {
-      this.$emit('item-click', value);
+      this.bus.$emit('set-query', value);
     },
   },
 };

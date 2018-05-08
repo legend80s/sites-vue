@@ -6,12 +6,12 @@
       clearable
       required
       v-model.trim="query"
-      v-on:input="debouncedFetchSuggestions"
+      @input="debouncedFetchSuggestions"
     >
       <el-button
         type="primary"
         slot="append"
-        v-on:click="search"
+        @click="search"
       >
         搜索
       </el-button>
@@ -19,9 +19,11 @@
 
     <SuggestionList
       v-if="suggestions.length > 0"
-      v-bind:suggestions="suggestions"
-      v-on:set-query="handleSetQuery"
-      v-bind:query="query"
+
+      :suggestions="suggestions"
+      :query="query"
+
+      :bus="bus"
     />
   </el-form>
 </template>
@@ -59,11 +61,17 @@ export default {
     return {
       query: '',
       suggestions: [],
+
+      // 监听孙子组件的事件
+      // a global event bus can be passed down through the props chain
+      // 该方式更加简洁，中间组件无需往上传递事件，只需将 `bus` 往下传即可
+      bus: new Vue(),
     };
   },
 
   created() {
     this.fetchSuggestions();
+    this.bus.$on('set-query', this.handleSetQuery);
   },
 
   methods: {

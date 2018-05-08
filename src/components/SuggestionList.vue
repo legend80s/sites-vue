@@ -3,10 +3,12 @@
     <ol>
       <SuggestionItem
         v-for="(suggestion, index) in suggestions"
-        v-bind:key="index"
-        v-bind:suggestion="suggestion"
-        v-on:item-click="handleItemClick"
-        v-bind:query="query"
+
+        :key="index"
+        :suggestion="suggestion"
+        :query="query"
+
+        :bus="bus"
       ></SuggestionItem>
     </ol>
   </div>
@@ -14,6 +16,7 @@
 
 <script>
 /* eslint-disable no-console */
+import Vue from 'vue';
 import SuggestionItem from './SuggestionItem';
 
 export default {
@@ -29,12 +32,10 @@ export default {
       type: String,
       required: true,
     },
-  },
 
-  methods: {
-    handleItemClick(query) {
-      console.log('reset query to in suggestion-list:', query);
-      this.$emit('set-query', query);
+    bus: {
+      type: Vue,
+      required: true,
     },
   },
 
