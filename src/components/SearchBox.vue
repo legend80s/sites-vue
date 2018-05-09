@@ -20,8 +20,6 @@
     <SuggestionList
       v-if="suggestions.length > 0"
       v-bind:suggestions="suggestions"
-      v-on:set-query="handleSetQuery"
-      v-bind:query="query"
     />
   </el-form>
 </template>
@@ -55,6 +53,23 @@ export default {
     SuggestionList,
   },
 
+  provide() {
+    const providers = {};
+
+    Object.defineProperty(providers, 'query', {
+      // enumerable: true,
+
+      get: () => this.query,
+      set: (newQuery) => {
+        // console.log('set query from', this.query, 'to', newQuery);
+
+        this.query = newQuery;
+      },
+    });
+
+    return { providers };
+  },
+
   data() {
     return {
       query: '',
@@ -85,11 +100,6 @@ export default {
     },
 
     debouncedFetchSuggestions: debounce(function _() { this.fetchSuggestions(); }, 500),
-
-    handleSetQuery(query) {
-      console.log('reset query to in SearchBox:', query);
-      this.query = query;
-    },
   },
 };
 

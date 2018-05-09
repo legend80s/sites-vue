@@ -20,12 +20,9 @@ export default {
         return 'value' in self && 'index' in self;
       },
     },
-
-    query: {
-      type: String,
-      required: true,
-    },
   },
+
+  inject: ['providers'],
 
   computed: {
     /**
@@ -33,7 +30,7 @@ export default {
      * @return {string}
      */
     hilighted() {
-      const boldQuerySegement = this.suggestion.value.replace(this.query, matched => `<b>${matched}</b>`);
+      const boldQuerySegement = this.suggestion.value.replace(this.providers.query, matched => `<b>${matched}</b>`);
 
       return boldQuerySegement;
     },
@@ -41,7 +38,7 @@ export default {
 
   methods: {
     handleClick({ value }) {
-      this.$emit('item-click', value);
+      this.providers.query = value;
     },
   },
 };

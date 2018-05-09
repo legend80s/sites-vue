@@ -5,8 +5,6 @@
         v-for="(suggestion, index) in suggestions"
         v-bind:key="index"
         v-bind:suggestion="suggestion"
-        v-on:item-click="handleItemClick"
-        v-bind:query="query"
       ></SuggestionItem>
     </ol>
   </div>
@@ -23,18 +21,6 @@ export default {
     suggestions: {
       type: Array,
       required: true,
-    },
-
-    query: {
-      type: String,
-      required: true,
-    },
-  },
-
-  methods: {
-    handleItemClick(query) {
-      console.log('reset query to in suggestion-list:', query);
-      this.$emit('set-query', query);
     },
   },
 
