@@ -14,7 +14,8 @@
     "element-ui": "^2.3.7",
     "lodash.debounce": "^4.0.8",
     "vue": "^2.5.2",
-    "vue-jsonp": "^0.1.8"
+    "vue-jsonp": "^0.1.8",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

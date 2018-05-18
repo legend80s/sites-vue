@@ -8,6 +8,16 @@
 </template>
 
 <script>
+import {
+  mapState,
+} from 'vuex';
+
+import {
+  SET_QUERY,
+
+  FETCH_SUGGESTIONS,
+} from '../store/mutation-types';
+
 export default {
   name: 'SuggestionItem',
 
@@ -19,11 +29,6 @@ export default {
       validator(self) {
         return 'value' in self && 'index' in self;
       },
-    },
-
-    query: {
-      type: String,
-      required: true,
     },
   },
 
@@ -37,11 +42,20 @@ export default {
 
       return boldQuerySegement;
     },
+
+    ...mapState([
+      'query',
+    ]),
+
+    // query() {
+    //   return this.$store.state.query;
+    // },
   },
 
   methods: {
     handleClick({ value }) {
-      this.$emit('item-click', value);
+      this.$store.commit(SET_QUERY, { query: value });
+      this.$store.dispatch(FETCH_SUGGESTIONS);
     },
   },
 };

@@ -20,18 +20,17 @@
     <SuggestionList
       v-if="suggestions.length > 0"
       v-bind:suggestions="suggestions"
-      v-on:set-query="handleSetQuery"
-      v-bind:query="query"
     />
   </el-form>
 </template>
 
 <script>
-/* eslint-disable no-console */
 import Vue from 'vue';
-import debounce from 'lodash.debounce';
-import VueJsonp from 'vue-jsonp';
+import {
+  mapState,
+} from 'vuex';
 
+import debounce from 'lodash.debounce';
 import {
   Input,
   Button,
@@ -39,13 +38,15 @@ import {
 } from 'element-ui';
 
 import SuggestionList from './SuggestionList';
+import {
+  SET_QUERY,
 
+  FETCH_SUGGESTIONS,
+} from '../store/mutation-types';
 
 Vue.use(Input);
 Vue.use(Button);
 Vue.use(Form);
-
-Vue.use(VueJsonp);
 
 
 export default {
@@ -55,15 +56,27 @@ export default {
     SuggestionList,
   },
 
-  data() {
-    return {
-      query: '',
-      suggestions: [],
-    };
+  computed: {
+    query: {
+      get() {
+        return this.$store.state.query;
+      },
+      set(query) {
+        this.$store.commit(SET_QUERY, { query });
+      },
+    },
+
+    ...mapState([
+      'suggestions',
+    ]),
+
+    // suggestions() {
+    //   return this.$store.state.suggestions;
+    // },
   },
 
   created() {
-    this.fetchSuggestions();
+    this.$store.dispatch(FETCH_SUGGESTIONS);
   },
 
   methods: {
@@ -71,25 +84,9 @@ export default {
       window.open(`http://www.soku.com/search_video/q_${window.encodeURIComponent(this.query)}`);
     },
 
-    fetchSuggestions() {
-      this.$jsonp('http://tip.soku.com/search_tip_1?site=2', {
-        query: this.query,
-        callbackQuery: 'jsoncallback',
-      })
-        .then(json => json.r.map(({ w }, index) => ({ value: w, index })))
-        .then((suggestions) => {
-          console.log('suggestions:', suggestions);
-          this.suggestions = suggestions;
-        })
-      ;
-    },
-
-    debouncedFetchSuggestions: debounce(function _() { this.fetchSuggestions(); }, 500),
-
-    handleSetQuery(query) {
-      console.log('reset query to in SearchBox:', query);
-      this.query = query;
-    },
+    debouncedFetchSuggestions: debounce(function fetchSuggestions() {
+      this.$store.dispatch(FETCH_SUGGESTIONS);
+    }, 500),
   },
 };
 
