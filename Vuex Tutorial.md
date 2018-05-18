@@ -1,8 +1,6 @@
-# Vuex Tutorial
-
 ## 前言
 
-> **Vue is Awesome! So does Vuex! But not its docs 😓.**
+> **Vue is Awesome! So is Vuex! But not its docs 😓.**
 
 image
 
@@ -14,31 +12,26 @@ image
 
 Vuex 的文档远没有 Vue 好，很零碎，看完之后仍然如堕云里不知所述。本文参照国内外很多文章，其中对我启发较大的是 https://scotch.io/tutorials/state-management-in-vue-getting-started-with-vue，该文较结构清晰叙述简洁，但同时解释的稍稍少了点。
 
-故成此文，望对如我一般最初“畏惧” Vuex 等一切状态管理框架的初学者们有所帮助，要是还能够带领大家拨开状态管理的迷雾，若此这般善莫大焉！也希望对学习 Redux 的朋友有少许启发，有机会再写一篇 Redux 文。
+故成此文，望对如我一般最初“畏惧” Vuex 等一切状态管理框架的初学者们有所帮助，若还能够带领大家拨开状态管理的迷雾，如此这般善莫大焉！也希望对学习 Redux 的朋友有少许启发，有机会再写一篇 Redux 文。
 
 ## 什么是 Vuex？
 
 Vuex 是一个状态集中管理框架，每一次状态改变都是可预测的。原文如下：
 
-> Vuex is a **state management pattern + library** for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion
+> Vuex is a **state management pattern + library** for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
 
-我们逐词解释下：
+逐词剖析如下：
 
 1. 什么是状态？
    - 一切引起 view 变化的数据都是状态，比如 `data`、`computed` 中的数据。
 2. 何谓“集中”？
    - 因为由 `store` 集中管理所有的状态，所以称之“集中”。
 3. 为什么叫“框架”？
-   - 必须按照特定模式去编程，此所谓框架也
+   - 必须按照特定模式去编程，此所谓框架也。
 4. 为什么以及如何实现“可预测”？
    1. Why：方便定位问题。可预测的代码一旦肇事可“时光逆转”到事发现场，或者说恢复事发现场，高大上则谓之“时光旅行 Time Travelling”。*期待下篇的“时光旅行”吧！*
    2. HOW：如何实现“可预测”，严格模式下 Vuex 的每一次状态改变都必须通过 `commit` 或 `dispatch` 来执行，以此保证状态的“可预测”。但开启严格模式，会有性能问题（deep watch），所以一般线上关闭该特性。
 
-一张图总结下：
-
-![vuex](/Users/chuanzong.lcz/Downloads/images/wechat/公众号/vuex/vuex.png)
-
-请顺时针看图说话：用户触发操作发起请求，对应 `dispatch` 一个 `action`，请求结束，`commit` 一个 `mutation` 去触发状态改变，devtool 拦截每一次 `mutation`，方便 debug，状态改变触发 view 变化，即导致引用该状态的所有组件得到高效更新。**Predictable and Performant thus Cool, isn't it!** 绿色的虚线框表示 Vuex 的统治疆域，即所有的状态改变。
 
 ## 何故引入 Vuex？
 
@@ -83,17 +76,17 @@ export default store;
 │   ├── App.vue
 │   └── ...
 └── store
-    ├── index.js          # 我们组装模块并导出 store 的地方
-    ├── actions.js        # 根级别的 action
-    ├── mutations.js      # 根级别的 mutation
+    ├── index.js # 我们组装模块并导出 store 的地方
+    ├── actions.js # 根级别的 action
+    ├── mutations.js # 根级别的 mutation
     └── modules
-        ├── cart.js       # 购物车模块
-        └── products.js   # 产品模块
+        ├── cart.js # 购物车模块
+        └── products.js # 产品模块
 ```
 
 回顾下我们的需求
 
-> 实现类似优酷的搜索下拉提示效果，具体要求：
+> 实现类似优酷的搜索下拉提示效果：
 >
 > 1. 输入文字展现相应下拉提示结果
 > 2. 高亮匹配的查询词
@@ -203,7 +196,7 @@ actions: {
 export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 ```
 
-同样将获取下拉提示的函数名用常量 `FETCH_SUGGESTIONS` 替代
+同样将获取下拉提示的函数名用常量 `FETCH_SUGGESTIONS` 替代。
 
 ### 四、 注入 `store`
 
@@ -228,7 +221,7 @@ new Vue({
 
 在组件中通过 `this.$store` 可以获取到刚刚注入的 `store`。现在 `query` 和 `suggestions` 都改为计算属性并从 `store` 中取，比如获取 `query`：`this.$store.state.query`。
 
-页面初始化是需要展现默认下拉提示，所以在 `created` 中，我们执行 `this.$store.dispatch(FETCH_SUGGESTIONS)`，该操作会触发 `store` 中 `FETCH_SUGGESTIONS` 方法。`dispatch` 方法同样有两种签名。但因为在获取下拉提示的 `action` 方法中，我们能够获取到 `query`，因此无需使用带 `payload` 的方式。
+页面初始化时需展现默认下拉提示，所以在 `created` 中，我们执行 `this.$store.dispatch(FETCH_SUGGESTIONS)`，该操作会触发 `store` 中 `FETCH_SUGGESTIONS` 方法。`dispatch` 方法同样有两种签名。但因为在获取下拉提示的 `action` 方法中，我们能够获取到 `query`，因此无需使用带 `payload` 的方式。
 
 ```javascript
 // components/SearchBox.vue
@@ -254,7 +247,7 @@ export default {
   
   methods: {
     search() {
-        window.open(`http://www.soku.com/search_video/q_${window.encodeURIComponent(this.query)}`);
+        window.open(`http://www.soku.com/search_video/q_${this.query}`);
     },
     debouncedFetchSuggestions: debounce(function fetchSuggestions() {
       this.$store.dispatch(FETCH_SUGGESTIONS);
@@ -263,11 +256,11 @@ export default {
 };
 ```
 
-当输入查询词时会有一个报警。
+以上代码在输入查询词时会有一个报警。
 
 > Computed property "query" was assigned to but it has no setter.
 
-因为 `query` 被 `v-model` 绑定，用户输入时会试图修改 `query`，而在严格模式中，由于这个修改不是在 `mutation` 函数中执行的，所以会抛错，有两种解法：
+因为 `query` 被 `v-model` 绑定，用户输入时 Vue 会试图直接修改 `query`，而在严格模式中，所有的状态修改必须通过 `mutation` 执行，所以会抛错，有两种解法：
 **解法一：**
 
 绑定 `value` 并在 `input` 事件中通过 `commit` 来更新该值。
@@ -277,18 +270,21 @@ export default {
 
 <input :value="query" @input="updateQuery">
 
+<script>
+// ...
 methods: {
-  updateMessage (e) {
+  updateQuery(e) {
     this.$store.commit(SET_QUERY, e.target.value)
   }
 }
+</script>
 ```
 
 **解法二：**
 
-仍然利用 `v-model` 的双向绑定便利性，但是给 `query` 添加 `getter / setter` 方法，在 `setter` 中 `commit`
+仍利用 `v-model` 的双向绑定便利性，但是给 `query` 添加 `getter / setter` 方法，在 `setter` 中 `commit`。
 
-该方法比一简单多了而且也保留了 `v-model` 中很有用的特性。比如修饰符 `trim` 等。
+该方法较一简单多了而且也保留了 `v-model` 的很多有用的特性。比如修饰符 `trim` 等。
 
 ```javascript
 // components/SearchBox.vue
@@ -329,38 +325,41 @@ methods: {
 },
 ```
 
-至此用 Vuex 重构的目的已经完成，还可用 Vuex 的工具函数 `mapState` 做一点代码简化。是否简化看个人喜好或遵循团队规范。
+至此用 Vuex 重构的目标已经完成，还可利用 Vuex 的工具函数 `mapState` 做一点代码简化。是否简化看个人喜好或遵循团队规范。
 
-其他的工具函数还有：`mapGetters`、`mapMutations`、`mapActions`。
+其他工具函数包括：`mapGetters`、`mapMutations`、`mapActions`。
 
 小疑惑：为什么是 `mapState` 而非 `mapStates`？是为了和 `state` 呼应，那为什么不用 `states`？`state` 作为名词是可数的呀，我推测可能是为了和 React 保持一致。
 
 ```javascript
 import {
   mapState,
+  mapGetters,
+  mapMutations,
+  mapActions,
 } from 'vuex';
   
 // 一个例子🌰而已
 computed: {
   query() {
   	return this.$store.state.query;
-	}
+	},
   suggestions() {
   	return this.$store.state.suggestions;
-	}
+	},
   
   value() {
     return this.$store.getters.value;
-  }
+  },
 },
   
 methods: {
   increment() {
     this.$store.commit('increment', { augment: 2 })
-  }
+  },
   fetchSuggesions() {
     this.$store.dispatch('fetchSuggesions')
-  }
+  },
 }
 
 // 可简化为
@@ -381,17 +380,25 @@ methods: {
 
 ## 总结
 
-> **Predictable and Performant thus Cool, isn't it!**
+> **Vue is Predictable and Performant thus Awesome!**
 
-Vuex 的好处：
+一张图总结：
 
-1. 分层明确，结构清晰。数据和和对数据的操作与 View 隔离。
+![vuex](/Users/chuanzong.lcz/Downloads/images/wechat/公众号/vuex/vuex.png)
+
+请顺时针看图说话：用户触发操作发起请求，对应 `dispatch` 一个 `action`，请求结束，`commit` 一个 `mutation` 去触发状态改变，devtool 拦截每一次 `mutation`，方便 debug，状态改变触发 view 变化，使得引用该状态的所有组件得到高效更新。*绿色的虚线框代表 Vuex 的统治疆域：所有的状态改变。*
+
+**Predictable, Performant and Cool, isn't it!**
+
+Vuex 带来的好处：
+
+1. 分层明确，结构清晰。数据和对数据的操作与 View 隔离。
 2. 可预测的状态管理。方便 debug。
-3. 集中、统一的状态改变方式。DRY 原则，防止统一逻辑散落，导致复制粘贴。
-4. 优雅的组件通信解决方案。优势尤其凸显当需要在 sibling 组件间通信时。
+3. 集中、统一的状态改变方式。DRY 原则，防止重复逻辑散落，导致复制粘贴。
+4. 优雅的组件通信解决方案。优势尤其凸显在当需要在 sibling 组件间通信时。
 5. 高效。高效对比然后结合虚拟 DOM 按需更新。
 
-从这几点来看，即使是小的应用，引入 Vuex 也是颇有益处的。
+从这几点来看，即使是小型应用，引入 Vuex 也颇有益处。
 
 代码见：vuex 分支 https://github.com/legend80s/sites-vue/tree/feature/vuex
 

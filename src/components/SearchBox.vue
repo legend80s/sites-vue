@@ -81,7 +81,7 @@ export default {
 
   methods: {
     search() {
-      window.open(`http://www.soku.com/search_video/q_${window.encodeURIComponent(this.query)}`);
+      window.open(`http://www.soku.com/search_video/q_${this.query}`);
     },
 
     debouncedFetchSuggestions: debounce(function fetchSuggestions() {
